@@ -1,26 +1,9 @@
-// 1. เรียกใช้งาน Module 'http'
-const http = require('http');
-
-// 2. กำหนด Port
-const port = process.env.PORT || 3000;
-
-// 3. สร้าง Web Server
-const server = http.createServer((req, res) => {
-
-    // กำหนดสถานะการตอบกลับ
-    res.statusCode = 200;
-
-    // กำหนดประเภทข้อมูล
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-
-    // ส่งหน้าเว็บ
-    res.end(`
 <!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Railway Web Server</title>
+<title>Princess Team Server</title>
 
 <style>
 *{
@@ -35,58 +18,102 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    background:linear-gradient(135deg,#000000,#1a1a1a,#ff1493);
+    overflow:hidden;
+    background:linear-gradient(135deg,#ff9ad5,#ff69b4,#b266ff,#6a0dad);
+    animation:bgMove 10s infinite alternate;
+}
+
+@keyframes bgMove{
+    0%{background-position:left;}
+    100%{background-position:right;}
 }
 
 .card{
-    background:rgba(0,0,0,0.75);
-    border:2px solid #ff69b4;
-    border-radius:25px;
-    padding:50px;
-    width:700px;
+    width:760px;
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(15px);
+    border-radius:30px;
+    padding:45px;
     text-align:center;
     color:white;
-    box-shadow:0 0 30px #ff1493;
+    border:3px solid rgba(255,255,255,.5);
+    box-shadow:0 0 40px rgba(255,105,180,.8);
 }
 
 .avatar{
-    width:120px;
-    height:120px;
-    border-radius:50%;
-    background:#ff1493;
+    width:150px;
+    height:150px;
     margin:auto;
+    border-radius:50%;
+    background:linear-gradient(135deg,#ff69b4,#ffd700);
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:55px;
-    box-shadow:0 0 20px #ff69b4;
+    font-size:75px;
+    box-shadow:0 0 35px gold;
+    animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-12px);}
 }
 
 h1{
-    color:#ff69b4;
-    margin-top:25px;
-    margin-bottom:20px;
-    font-size:32px;
+    margin-top:20px;
+    font-size:40px;
+    color:#fff;
+    text-shadow:0 0 15px gold;
 }
 
-p{
-    font-size:20px;
-    color:#eeeeee;
-    margin:10px 0;
+.subtitle{
+    color:#fff7d6;
+    margin-top:10px;
+    font-size:22px;
 }
 
 .info{
     margin-top:30px;
-    background:#111;
-    padding:18px;
-    border-radius:15px;
-    border:1px solid #ff69b4;
+    background:rgba(255,255,255,.12);
+    border-radius:20px;
+    padding:25px;
+    border:2px solid pink;
+}
+
+.info p{
+    margin:12px;
+    font-size:21px;
+}
+
+.team{
+    margin-top:25px;
+    font-size:28px;
+    color:#ffe066;
+    font-weight:bold;
+    text-shadow:0 0 15px gold;
 }
 
 .footer{
-    margin-top:30px;
-    color:#ff69b4;
-    font-size:15px;
+    margin-top:35px;
+    color:#fff;
+    font-size:18px;
+}
+
+.star{
+    position:absolute;
+    color:white;
+    animation:twinkle 2s infinite;
+}
+
+@keyframes twinkle{
+    0%,100%{
+        opacity:.2;
+        transform:scale(.8);
+    }
+    50%{
+        opacity:1;
+        transform:scale(1.4);
+    }
 }
 </style>
 
@@ -94,36 +121,50 @@ p{
 
 <body>
 
+<div class="star" style="top:8%;left:10%;font-size:25px;">✨</div>
+<div class="star" style="top:18%;right:15%;font-size:30px;">⭐</div>
+<div class="star" style="bottom:12%;left:15%;font-size:22px;">✨</div>
+<div class="star" style="bottom:20%;right:10%;font-size:28px;">💖</div>
+<div class="star" style="top:45%;left:5%;font-size:20px;">🌸</div>
+<div class="star" style="top:60%;right:8%;font-size:20px;">✨</div>
+
 <div class="card">
 
 <div class="avatar">
-💻
+👑
 </div>
 
-<h1>Web Server</h1>
+<h1>Princess Team Server</h1>
 
-<p><strong>ชื่อ :</strong> นางสาวเขมมิกา กลิ้งรัมย์</p>
-
-<p><strong>รหัสนักศึกษา :</strong> 69319010091</p>
+<p class="subtitle">
+🌸 Welcome to Princess Team 🌸
+</p>
 
 <div class="info">
-<h2 style="color:#ff69b4;">🚀 Railway Server</h2>
-<p>เครื่องแม่ข่ายทำงานปกติแล้วค่ะ</p>
-<p>Node.js HTTP Server</p>
+
+<p><strong>👸 ชื่อ :</strong> นางสาวเขมมิกา กลิ้งรัมย์</p>
+
+<p><strong>🎓 รหัสนักศึกษา :</strong> 69319010091</p>
+
+<p><strong>💻 ระบบ :</strong> Node.js HTTP Server</p>
+
+<p><strong>🚂 Railway :</strong> Online พร้อมให้บริการ</p>
+
+</div>
+
+<div class="team">
+👑 ทีมเจ้าหญิง 👑
+<br>
+💖 Princess Power • Dream • Shine • Success 💖
 </div>
 
 <div class="footer">
-❤ Black & Pink Theme ❤
+✨ Black • Pink • Purple • Gold Theme ✨
+<br><br>
+🌷 Made with ❤ by Princess Team 🌷
 </div>
 
 </div>
 
 </body>
 </html>
-`);
-});
-
-// 4. เริ่มต้น Server
-server.listen(port, () => {
-    console.log(`Server is running! เครื่องแม่ข่ายเปิดทำงานแล้วที่ช่องทาง: ${port}`);
-});
