@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Princess Team Server</title>
-
-<style>
 *{
     margin:0;
     padding:0;
@@ -14,30 +6,42 @@
 }
 
 body{
-    height:100vh;
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
     overflow:hidden;
     background:linear-gradient(135deg,#ff9ad5,#ff69b4,#b266ff,#6a0dad);
-    animation:bgMove 10s infinite alternate;
+    background-size:300% 300%;
+    animation:bgMove 10s ease infinite;
 }
 
 @keyframes bgMove{
-    0%{background-position:left;}
-    100%{background-position:right;}
+    0%{
+        background-position:0% 50%;
+    }
+    50%{
+        background-position:100% 50%;
+    }
+    100%{
+        background-position:0% 50%;
+    }
 }
 
 .card{
     width:760px;
+    max-width:90%;
     background:rgba(255,255,255,.15);
     backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
     border-radius:30px;
     padding:45px;
     text-align:center;
     color:white;
-    border:3px solid rgba(255,255,255,.5);
-    box-shadow:0 0 40px rgba(255,105,180,.8);
+    border:3px solid rgba(255,255,255,.45);
+    box-shadow:
+        0 0 40px rgba(255,105,180,.8),
+        0 0 80px rgba(255,105,180,.3);
 }
 
 .avatar{
@@ -55,14 +59,18 @@ body{
 }
 
 @keyframes float{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-12px);}
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-12px);
+    }
 }
 
 h1{
     margin-top:20px;
     font-size:40px;
-    color:#fff;
+    color:#ffffff;
     text-shadow:0 0 15px gold;
 }
 
@@ -77,12 +85,13 @@ h1{
     background:rgba(255,255,255,.12);
     border-radius:20px;
     padding:25px;
-    border:2px solid pink;
+    border:2px solid #ffb6e6;
 }
 
 .info p{
-    margin:12px;
+    margin:12px 0;
     font-size:21px;
+    line-height:1.6;
 }
 
 .team{
@@ -95,7 +104,7 @@ h1{
 
 .footer{
     margin-top:35px;
-    color:#fff;
+    color:#ffffff;
     font-size:18px;
 }
 
@@ -115,56 +124,42 @@ h1{
         transform:scale(1.4);
     }
 }
-</style>
 
-</head>
+@media(max-width:768px){
 
-<body>
+.card{
+    width:95%;
+    padding:30px 20px;
+}
 
-<div class="star" style="top:8%;left:10%;font-size:25px;">✨</div>
-<div class="star" style="top:18%;right:15%;font-size:30px;">⭐</div>
-<div class="star" style="bottom:12%;left:15%;font-size:22px;">✨</div>
-<div class="star" style="bottom:20%;right:10%;font-size:28px;">💖</div>
-<div class="star" style="top:45%;left:5%;font-size:20px;">🌸</div>
-<div class="star" style="top:60%;right:8%;font-size:20px;">✨</div>
+.avatar{
+    width:120px;
+    height:120px;
+    font-size:60px;
+}
 
-<div class="card">
+h1{
+    font-size:30px;
+}
 
-<div class="avatar">
-👑
-</div>
+.subtitle{
+    font-size:18px;
+}
 
-<h1>Princess Team Server</h1>
+.info{
+    padding:20px;
+}
 
-<p class="subtitle">
-🌸 Welcome to Princess Team 🌸
-</p>
+.info p{
+    font-size:17px;
+}
 
-<div class="info">
+.team{
+    font-size:22px;
+}
 
-<p><strong>👸 ชื่อ :</strong> นางสาวเขมมิกา กลิ้งรัมย์</p>
+.footer{
+    font-size:15px;
+}
 
-<p><strong>🎓 รหัสนักศึกษา :</strong> 69319010091</p>
-
-<p><strong>💻 ระบบ :</strong> Node.js HTTP Server</p>
-
-<p><strong>🚂 Railway :</strong> Online พร้อมให้บริการ</p>
-
-</div>
-
-<div class="team">
-👑 ทีมเจ้าหญิง 👑
-<br>
-💖 Princess Power • Dream • Shine • Success 💖
-</div>
-
-<div class="footer">
-✨ Black • Pink • Purple • Gold Theme ✨
-<br><br>
-🌷 Made with ❤ by Princess Team 🌷
-</div>
-
-</div>
-
-</body>
-</html>
+}
