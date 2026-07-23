@@ -68,7 +68,7 @@ const server = http.createServer((req, res) => {
         <body>
             <div class="card">
                 <div class="tiara">👑✨</div>
-                <h1>สวัสดีค่ะ! นี่คือ Web Server ของ<br>[นางสาวเขมมิกา กลิ้งรัมย์ HIT.1/1VB]</h1>
+                <h1>สวัสดีค่ะ! นี่คือ Web Server ของ<br>[นางสาวเขมมิกา กลิ้งรัมย์   รหัสนักศึกษา 69319010091]</h1>
                 <p>เครื่องแม่ข่ายทำงานปกติบนระบบ Railway แล้วค่ะ! 🌸</p>
             </div>
         </body>
