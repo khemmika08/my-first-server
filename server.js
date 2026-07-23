@@ -1,112 +1,82 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Princess World</title>
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Sarabun', sans-serif;
-            background: linear-gradient(135deg, #ffd6eb, #ffc1e3, #ff9fd2);
-            overflow: hidden;
-            gap: 20px;
-        }
-        .info {
-            background: rgba(255, 255, 255, 0.7);
-            padding: 20px 40px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(255, 79, 163, 0.1);
-            backdrop-filter: blur(5px);
-            z-index: 10;
-        }
-        .info p {
-            margin: 10px 0;
-            font-size: 18px;
-            color: #4a4a4a;
-        }
-        button {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 30px;
-            background: #ff4fa3;
-            color: #fff;
-            cursor: pointer;
-            transition: .3s;
-            font-family: 'Sarabun', sans-serif;
-            font-size: 16px;
-            box-shadow: 0 4px 15px rgba(255, 79, 163, 0.4);
-            z-index: 10;
-        }
-        button:hover {
-            transform: scale(1.05);
-            background: #ff2a8d;
-        }
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 5s infinite ease-in-out;
-            background: rgba(255, 255, 255, 0.5);
-            box-shadow: inset -5px -5px 15px rgba(255, 79, 163, 0.2), 5px 5px 15px rgba(255, 255, 255, 0.5);
-        }
-        .orb:nth-child(1) {
-            width: 60px;
-            height: 60px;
-            top: 10%;
-            left: 5%;
-            animation-delay: 0s;
-        }
-        .orb:nth-child(2) {
-            width: 40px;
-            height: 40px;
-            bottom: 15%;
-            right: 10%;
-            animation-delay: 1s;
-        }
-        .orb:nth-child(3) {
-            width: 50px;
-            height: 50px;
-            top: 25%;
-            right: 5%;
-            animation-delay: 2s;
-        }
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-    </style>
-</head>
-<body>
+// 1. เรียกใช้งาน Module ที่ชื่อว่า 'http' ซึ่งเป็นระบบพื้นฐานของ Node.js สำหรับทำเซิร์ฟเวอร์
+const http = require('http');
 
-    <div class="orb"></div>
-    <div class="orb"></div>
-    <div class="orb"></div>
+// 2. กำหนดช่องทาง (Port) ที่เซิร์ฟเวอร์จะใช้สื่อสาร (แก้ไข: เติมเครื่องหมาย = ที่ขาดหายไป)
+const port = process.env.PORT || 3000;
 
-    <div class="info">
-        <p>🎓 รหัสนักศึกษา : 69319010047</p>
-        <p>📚 ชั้น : HIT1/1(VB)</p>
-        <p>💻 สาขา : เทคโนโลยีสารสนเทศ</p>
-    </div>
+// 3. สร้างเครื่องแม่ข่าย (Server) ที่คอยรับคำขอ (req) และตอบกลับ (res) (แก้ไข: เปลี่ยน [ เป็น { )
+const server = http.createServer((req, res) => {
 
-    <button>คลิกเพื่อเข้าสู่ระบบ</button>
+    // 3.1 ตั้งรหัสสถานะ 200 หมายถึง "ทำงานสำเร็จ (OK)"
+    res.statusCode = 200;
 
-    <script>
-        document.querySelector("button").onclick = () => {
-            alert("✨ Welcome to Princess World 👑");
-        }
-    </script>
+    // 3.2 บอกเบราว์เซอร์ของผู้ใช้ว่า สิ่งที่ส่งกลับไปคือไฟล์ข้อความแบบ HTML และรองรับภาษาไทย (utf-8)
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
 
-</body>
-</html>
+    // 3.3 ส่งข้อมูลหน้าเว็บกลับไปหาผู้ใช้ (ตกแต่งเป็นธีมเจ้าหญิงสีชมพูสุดน่ารัก)
+    res.end(`
+        <!DOCTYPE html>
+        <html lang="th">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Princess Server 🌸</title>
+            <style>
+                body {
+                    background: linear-gradient(135deg, #ffe5ec 0%, #ffb3c6 100%);
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Kanit';
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                    margin: 0;
+                    color: #4a4a4a;
+                }
+                .card {
+                    background-color: rgba(255, 255, 255, 0.85);
+                    padding: 40px;
+                    border-radius: 30px;
+                    box-shadow: 0 10px 30px rgba(255, 75, 130, 0.2);
+                    text-align: center;
+                    border: 3px solid #ff85a2;
+                    max-width: 500px;
+                    backdrop-filter: blur(10px);
+                }
+                h1 {
+                    color: #ff477e;
+                    font-size: 2.2rem;
+                    margin-bottom: 20px;
+                    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+                }
+                p {
+                    font-size: 1.2rem;
+                    color: #ff7096;
+                    line-height: 1.6;
+                }
+                .tiara {
+                    font-size: 4rem;
+                    margin-bottom: 10px;
+                    animation: float 3s ease-in-out infinite;
+                }
+                @keyframes float {
+                    0% { transform: translateY(0px); }
+                    50% { transform: translateY(-10px); }
+                    100% { transform: translateY(0px); }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="card">
+                <div class="tiara">👑✨</div>
+                <h1>สวัสดีค่ะ! นี่คือ Web Server ของ<br>[นางสาวเขมมิกา กลิ้งรัมย์ HIT.1/1VB]</h1>
+                <p>เครื่องแม่ข่ายทำงานปกติบนระบบ Railway แล้วค่ะ! 🌸</p>
+            </div>
+        </body>
+        </html>
+    `);
+});
+
+// 4. สั่งให้เซิร์ฟเวอร์เริ่มต้นเปิดรับฟังการเชื่อมต่อตาม Port ที่กำหนดไว้ (แก้ไข: เปลี่ยนเป็นเครื่องหมาย backtick และปิด String ให้ถูกต้อง)
+server.listen(port, () => {
+    console.log(`Server is running! เครื่องแม่ข่ายเปิดทำงานแล้วที่ช่องทาง: ${port}`);
+});
