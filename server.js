@@ -2,22 +2,15 @@ const express = require('express');
 const { Pool } = require('pg');
 const app = express();
 const port = process.env.PORT || 3000;
-// 1. ตั้งคาให Server อานขอมูลที่สงมาจากฟอรม (HTML Form) ได
 app.use(express.urlencoded({ extended: true }));
-// 2. ตั้งคาเชื่อมตอฐานขอมูล PostgreSQL
 const pool = new Pool({
 connectionString: process.env.DATABASE_URL,
 });
-// ---------------------------------------------------------
-// เสนทางที่ 1: (GET /) เมื่อเปดหนาเว็บหลัก ใหแสดงฟอรมและตารางขอมูล
-// ---------------------------------------------------------
 app.get('/', async (req, res) => {
 try {
 const client = await pool.connect();
-// ดึงขอมูลทั้งหมด เรียงตาม ID
 const result = await client.query('SELECT * FROM students ORDER BY id ASC');
 client.release();
-// สรางหนาเว็บ HTML (มีฟอรมสําหรับกรอกขอมูล และตารางแสดงผล)
 let html = `
 <!DOCTYPE html>
 <html>
@@ -64,7 +57,6 @@ required>
 จัดการ</th></tr>
 
 `;
-// นําขอมูลจากฐานขอมูลมาวนลูปแสดงในตาราง
 result.rows.forEach(row => {
 html += `
 <tr>
@@ -95,40 +87,29 @@ res.send(`เกิดขอผิดพลาด: ${err.message}`);
 }
 });
 
-// ---------------------------------------------------------
-// เสนทางที่ 2: (POST /add) รับขอมูลจากฟอรมมาบันทึกลงฐานขอมูล
-// ---------------------------------------------------------
 app.post('/add', async (req, res) => {
-// รับคา มาจากชอง input ที่ตั้งชื่อ name="student_id" และ name="student_name"
 const { student_id, student_name } = req.body;
 try {
 const client = await pool.connect();
-// คําสั่ง SQL สําหรับ Insert (ใช $1, $2 เพื่อปองกันการโดนแฮกแบบ SQL Injection)
 await client.query('INSERT INTO students (student_id, student_name) VALUES ($1,
 $2)', [student_id, student_name]);
 client.release();
-res.redirect('/'); // บันทึกเสร็จ ใหเดงกลับไปหนาแรก
+res.redirect('/'); 
 } catch (err) {
 res.send(`เกิดขอผิดพลาดในการเพิ่มขอมูล: ${err.message}`);
 }
 });
-// ---------------------------------------------------------
-// เสนทางที่ 3: (POST /delete) รับ ID มาเพื่อลบขอมูล
-// ---------------------------------------------------------
 app.post('/delete', async (req, res) => {
-const { id } = req.body; // รับ ID ที่ซอนไวในฟอรม
+const { id } = req.body; 
 try {
 const client = await pool.connect();
-// คําสั่ง SQL สําหรับลบขอมูลตาม ID
 await client.query('DELETE FROM students WHERE id = $1', [id]);
 client.release();
-res.redirect('/'); // ลบเสร็จ ใหเดงกลับไปหนาแรก
+res.redirect('/'); 
 } catch (err) {
 res.send(`เกิดขอผิดพลาดในการลบขอมูล: ${err.message}`);
 }
 });
-
-// สั่งให Server เริ่มทํางาน
 app.listen(port, () => {
 console.log(`Server is running on port ${port}`);
 });
