@@ -9,7 +9,9 @@ connectionString: process.env.DATABASE_URL,
 app.get('/', async (req, res) => {
 try {
 const client = await pool.connect();
-const result = await client.query('SELECT * FROM students ORDER BY id ASC');
+const result = await client.query(
+  'SELECT * FROM students ORDER BY id ASC'
+);
 client.release();
 let html = `
 <!DOCTYPE html>
@@ -91,8 +93,7 @@ app.post('/add', async (req, res) => {
 const { student_id, student_name } = req.body;
 try {
 const client = await pool.connect();
-await client.query('INSERT INTO students (student_id, student_name) VALUES ($1,
-$2)', [student_id, student_name]);
+await client.query('INSERT INTO students (student_id, student_name) VALUES ($1,$2)', [student_id, student_name]);
 client.release();
 res.redirect('/'); 
 } catch (err) {
